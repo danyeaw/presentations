@@ -1,6 +1,17 @@
+---
+title: 5 Steps to Build Python Native GUI Widgets for BeeWare
+theme: white
+highlight-theme: atom-one-dark
+revealOptions:
+    transition: none
+    slideNumber: c
+    controls: false
+    progress: false
+---
 ## 5 Steps to Build Python Native GUI Widgets for
 
-# ![](images/beeware-logo.png)
+![BeeWare Logo](images/beeware-logo.png)
+<!-- .element style="border: 0; box-shadow: None" -->
 
 ---
 
@@ -16,7 +27,10 @@ Tools to simplify app deployment
 
 # Hello World
 
-```python
+![Hello World Example](images/hello-world.svg)
+<!-- .element style="border: 0; height: 500px; box-shadow: None" -->
+
+Notes:
 import toga
 
 
@@ -30,7 +44,6 @@ class HelloWorld(toga.App):
 
 def main():
     return HelloWorld('Hello World', 'org.pybee.helloworld')
-```
 
 ---
 
@@ -46,7 +59,8 @@ def main():
 
 * The controls and logic that a user interacts with when using a GUI
 
-![](images/toga-widgets.png)
+![Example Widgets](images/toga-widgets.png)
+<!-- .element style="border: 0; box-shadow: None" -->
 
 * A Canvas widget will be used as an example
 
@@ -82,45 +96,60 @@ def main():
 
 ---
 ## Research your widget
-
 Tkinter
 
-```Python
+![Research Examples](images/research-tkinter.svg)
+<!-- .element style="border: 0; box-shadow: None" -->
+
+Notes:
 canvas = Tk.Canvas()
 canvas.create_rectangle(10, 10, 100, 100, fill="C80000")
 canvas.pack()
-```
-wxpython
 
-```Python
+---
+## Research your widget
+wxPython
+
+![Research Examples](images/research-wx.svg)
+<!-- .element style="border: 0; box-shadow: None" -->
+
+Notes:
 wx.Panel.Bind(wx.EVT_PAINT, OnPaint)
 def OnPaint(self, evt):
     dc = wx.PaintDC()
     dc.SetBrush(wx.Brush(wx.Colour(200, 0, 0)))
     dc.DrawRectangle(10, 10, 100, 100)
-```
+
 ---
 
 ## Research your widget
 HTML canvas
 
-```javascript
+![Research Examples](images/research-html.svg)
+<!-- .element style="border: 0; box-shadow: None" -->
+
+Notes:
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
 ctx.fillStyle = "rgb(200, 0, 0)";
 ctx.fillRect(10, 10, 100, 100);
-```
 
-Gtk+
+---
 
-```Python
+## Research your widget
+GTK
+
+![Research Examples](images/research-gtk.svg)
+<!-- .element style="border: 0; box-shadow: None" -->
+
+Notes:
 drawingarea = Gtk.DrawingArea()
 drawingarea.connect("draw", draw)
 def draw(da, ctx):
     ctx.set_source_rgb(200, 0, 0)
     ctx.rectangle(10, 10, 100, 100)
     ctx.fill()
-```
+
 ---
 
 # Step 2
@@ -133,24 +162,30 @@ def draw(da, ctx):
 
 ---
 ## Write Docs
-```md
+
+![Write Docs](images/write-docs.svg)
+<!-- .element style="border: 0; box-shadow: None" -->
+
+Notes:
 The canvas is used for creating a blank widget that you can
 draw on.
 
-Usage
------
+## Usage
 
-Simple usage to draw a colored rectangle on the screen using
-the arc drawing object:
+An example of simple usage is to draw a colored rectangle on
+the screen using the `rect` drawing object:
 
 import toga
 canvas = toga.Canvas(style=Pack(flex=1))
 with canvas.fill(color=rgb(200, 0, 0)) as fill:
     fill.rect(10, 10, 100, 100)
-```
+
 ---
 ## Write Code Outline
-```Python
+![Canvas Outline](images/outline-canvas.svg)
+<!-- .element style="border: 0; box-shadow: None" -->
+
+Notes:
 class Canvas(Context, Widget):
     """Create new canvas.
 
@@ -161,9 +196,14 @@ class Canvas(Context, Widget):
             capable to return a implementation of this class.
             
      """
-```
 
-```Python
+---
+## Write Code Outline
+
+![Canvas Outline](images/outline-canvas.svg)
+<!-- .element style="border: 0; box-shadow: None" -->
+
+Notes:
 def rect(self, x, y, width, height):
     """Constructs and returns a :class:`Rect <Rect>`.
 
@@ -171,7 +211,6 @@ def rect(self, x, y, width, height):
         x (float): x coordinate for the rectangle.
 	...
     """
-```
 
 ---
 
@@ -187,13 +226,22 @@ def rect(self, x, y, width, height):
 
 ## Write tests for Toga_core
 
-```Python
+![Test Creation](images/toga_core-test-creation.svg)
+<!-- .element style="border: 0; box-shadow: None" -->
+
+Notes:
 def test_widget_created():
     assertEqual(canvas._impl.interface, canvas)
     self.assertActionPerformed(canvas, "create Canvas")
-```
 
-```Python
+---
+
+## Write tests for Toga_core
+
+![Test Creation](images/toga_core-test-modify.svg)
+<!-- .element style="border: 0; box-shadow: None" -->
+
+Notes:
 def test_rect_modify():
     rect = canvas.rect(-5, 5, 10, 15)
     rect.x = 5
@@ -204,13 +252,15 @@ def test_rect_modify():
     self.assertActionPerformedWith(
     	    canvas, "rect", x=5, y=-5, width=0.5, height=-0.5
         )
-```
 
 ---
 
 ## Code toga_core
 
-```Python
+![Canvas Outline](images/code-toga_core.svg)
+<!-- .element style="border: 0; box-shadow: None" -->
+
+Notes:
 class Canvas(Widget):
     def __init__(self, id=None, style=None, factory=None):
         super().__init__(id=id, style=style, factory=factory)
@@ -222,7 +272,6 @@ class Canvas(Widget):
         self.impl.rect(
             self.x, self.y, self.width, self.height
         )
-```
 
 ---
 # Step 4
@@ -236,7 +285,10 @@ class Canvas(Widget):
 ## Implement Toga_impl
 ### dummy backend
 
-```Python
+![Dummy Backend](images/toga_impl-dummy-backend.svg)
+<!-- .element style="border: 0; box-shadow: None" -->
+
+Notes:
 class Canvas(Widget):
     def create(self):
         self._action("create Canvas")
@@ -245,7 +297,6 @@ class Canvas(Widget):
         self._action(
             "rect", x=x, y=y, width=width, height=height
         )
-```
 
 ---
 
@@ -261,7 +312,10 @@ class Canvas(Widget):
 ## Implement Toga_impl
 ### your platform
 
-```Python
+![Canvas Outline](images/toga_impl-platform-backend.svg)
+<!-- .element style="border: 0; box-shadow: None" -->
+
+Notes:
 class Canvas(Widget):
     def create(self):
         self.native = Gtk.DrawingArea()
@@ -273,7 +327,6 @@ class Canvas(Widget):
 
     def rect(self, x, y, width, height, draw_context):
         draw_context.rectangle(x, y, width, height)
-```
 
 ---
 # ![](images/tutorial-4.png)  
