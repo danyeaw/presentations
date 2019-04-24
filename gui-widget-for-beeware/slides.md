@@ -102,9 +102,16 @@ Tkinter
 <!-- .element style="border: 0; box-shadow: None" -->
 
 Notes:
-canvas = Tk.Canvas()
-canvas.create_rectangle(10, 10, 100, 100, fill="C80000")
+import tkinter as tk
+
+root = Tk()
+canvas = tk.Canvas()
+canvas.create_rectangle(10, 10, 100, 100, fill="red")
 canvas.pack()
+root.mainloop()
+
+4 Steps:
+Create, Configure, Pack, and Bind
 
 ---
 ## Research your widget
@@ -217,7 +224,7 @@ def rect(self, x, y, width, height):
 # Step 3
 
 ## Implement Toga_core (with TDD)
-* Write a test for each function of the widget outlined in the API from Step 3
+* Write a test for each function of the widget outlined in the API from Step 2
 * Check that the tests fail
 * Specify the implementation layer API
 * Write the core code for the widget to call the implementation layer
