@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gaphor xmlns="http://gaphor.sourceforge.net/model" version="3.0" gaphor-version="1.0.1">
+<Package id="fcb62a06-66fc-11e9-9b9f-597468372eb0">
+<name>
+<val>New model</val>
+</name>
+<ownedClassifier>
+<reflist>
+<ref refid="fff15ba0-66fc-11e9-9b9f-597468372eb0"/>
+<ref refid="017a5594-66fd-11e9-9b9f-597468372eb0"/>
+</reflist>
+</ownedClassifier>
+<ownedDiagram>
+<reflist>
+<ref refid="fcb62e70-66fc-11e9-9b9f-597468372eb0"/>
+</reflist>
+</ownedDiagram>
+</Package>
+<Diagram id="fcb62e70-66fc-11e9-9b9f-597468372eb0">
+<name>
+<val>main</val>
+</name>
+<package>
+<ref refid="fcb62a06-66fc-11e9-9b9f-597468372eb0"/>
+</package>
+<canvas>
+<item id="fff1c1a8-66fc-11e9-9b9f-597468372eb0" type="ComponentItem">
+<drawing-style>
+<val>2</val>
+</drawing-style>
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 136.0126953125, 73.98330688476562)</val>
+</matrix>
+<width>
+<val>137.0</val>
+</width>
+<height>
+<val>50.0</val>
+</height>
+<subject>
+<ref refid="fff15ba0-66fc-11e9-9b9f-597468372eb0"/>
+</subject>
+<show_stereotypes_attrs>
+<val>0</val>
+</show_stereotypes_attrs>
+</item>
+<item id="017ab03e-66fd-11e9-9b9f-597468372eb0" type="ComponentItem">
+<drawing-style>
+<val>2</val>
+</drawing-style>
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 420.03759765625, 73.98330688476562)</val>
+</matrix>
+<width>
+<val>136.0</val>
+</width>
+<height>
+<val>50.0</val>
+</height>
+<subject>
+<ref refid="017a5594-66fd-11e9-9b9f-597468372eb0"/>
+</subject>
+<show_stereotypes_attrs>
+<val>0</val>
+</show_stereotypes_attrs>
+</item>
+<item id="1001672e-66fd-11e9-9b9f-597468372eb0" type="ConnectorItem">
+<show_stereotypes_attrs>
+<val>0</val>
+</show_stereotypes_attrs>
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 20.75616455078125, 98.98330688476562)</val>
+</matrix>
+<orthogonal>
+<val>0</val>
+</orthogonal>
+<horizontal>
+<val>0</val>
+</horizontal>
+<points>
+<val>[(0.0, 0.0), (115.25653076171875, -0.163421630859375)]</val>
+</points>
+<tail-connection>
+<ref refid="fff1c1a8-66fc-11e9-9b9f-597468372eb0"/>
+</tail-connection>
+</item>
+<item id="48b1b90c-66fd-11e9-9b9f-597468372eb0" type="Line">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 273.0126953125, 98.98330688476562)</val>
+</matrix>
+<orthogonal>
+<val>0</val>
+</orthogonal>
+<horizontal>
+<val>0</val>
+</horizontal>
+<points>
+<val>[(0.0, 0.0), (147.02490234375, 0.0)]</val>
+</points>
+</item>
+<item id="56c8e3bc-66fd-11e9-9b9f-597468372eb0" type="Line">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 556.03759765625, 96.92724609375)</val>
+</matrix>
+<orthogonal>
+<val>0</val>
+</orthogonal>
+<horizontal>
+<val>0</val>
+</horizontal>
+<points>
+<val>[(0.0, 0.0), (128.3544921875, 0.0498046875)]</val>
+</points>
+</item>
+<item id="5e02b07c-66fd-11e9-9b9f-597468372eb0" type="CommentItem">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 282.77099609375, 8.033935546875)</val>
+</matrix>
+<width>
+<val>129.0</val>
+</width>
+<height>
+<val>44.0</val>
+</height>
+<subject>
+<ref refid="5e029024-66fd-11e9-9b9f-597468372eb0"/>
+</subject>
+<show_stereotypes_attrs>
+<val>0</val>
+</show_stereotypes_attrs>
+</item>
+<item id="67d2d014-66fd-11e9-9b9f-597468372eb0" type="CommentLineItem">
+<show_stereotypes_attrs>
+<val>0</val>
+</show_stereotypes_attrs>
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 337.3231201171875, 52.033935546875)</val>
+</matrix>
+<orthogonal>
+<val>0</val>
+</orthogonal>
+<horizontal>
+<val>0</val>
+</horizontal>
+<points>
+<val>[(0.0, 0.0), (2.8970947265625, 46.949371337890625)]</val>
+</points>
+<head-connection>
+<ref refid="5e02b07c-66fd-11e9-9b9f-597468372eb0"/>
+</head-connection>
+</item>
+<item id="6d9a82ee-66fd-11e9-9b9f-597468372eb0" type="Box">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 21.13519287109375, 2.0254440307617188)</val>
+</matrix>
+<width>
+<val>663.4375610351562</val>
+</width>
+<height>
+<val>131.66837310791016</val>
+</height>
+</item>
+<item id="9deb2e44-66fd-11e9-9b9f-597468372eb0" type="CommentItem">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 41.34912109375, 8.033935546875)</val>
+</matrix>
+<width>
+<val>83.0</val>
+</width>
+<height>
+<val>44.0</val>
+</height>
+<subject>
+<ref refid="9deb00c2-66fd-11e9-9b9f-597468372eb0"/>
+</subject>
+<show_stereotypes_attrs>
+<val>0</val>
+</show_stereotypes_attrs>
+</item>
+<item id="a7ae0834-66fd-11e9-9b9f-597468372eb0" type="CommentLineItem">
+<show_stereotypes_attrs>
+<val>0</val>
+</show_stereotypes_attrs>
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 79.01097900390624, 52.033935546875)</val>
+</matrix>
+<orthogonal>
+<val>0</val>
+</orthogonal>
+<horizontal>
+<val>0</val>
+</horizontal>
+<points>
+<val>[(0.0, 0.0), (5.901984863281257, 46.949371337890625)]</val>
+</points>
+<head-connection>
+<ref refid="9deb2e44-66fd-11e9-9b9f-597468372eb0"/>
+</head-connection>
+</item>
+<item id="ae772b5a-66fd-11e9-9b9f-597468372eb0" type="CommentItem">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 577.204345703125, 8.033935546875)</val>
+</matrix>
+<width>
+<val>68.0</val>
+</width>
+<height>
+<val>44.0</val>
+</height>
+<subject>
+<ref refid="ae76f536-66fd-11e9-9b9f-597468372eb0"/>
+</subject>
+<show_stereotypes_attrs>
+<val>0</val>
+</show_stereotypes_attrs>
+</item>
+<item id="c115639e-66fd-11e9-9b9f-597468372eb0" type="CommentLineItem">
+<show_stereotypes_attrs>
+<val>0</val>
+</show_stereotypes_attrs>
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 605.927490234375, 52.033935546875)</val>
+</matrix>
+<orthogonal>
+<val>0</val>
+</orthogonal>
+<horizontal>
+<val>0</val>
+</horizontal>
+<points>
+<val>[(0.0, 0.0), (9.14453125, 44.33599853515625)]</val>
+</points>
+<head-connection>
+<ref refid="ae772b5a-66fd-11e9-9b9f-597468372eb0"/>
+</head-connection>
+</item>
+</canvas>
+</Diagram>
+<Component id="fff15ba0-66fc-11e9-9b9f-597468372eb0">
+<name>
+<val>Toga_Core</val>
+</name>
+<package>
+<ref refid="fcb62a06-66fc-11e9-9b9f-597468372eb0"/>
+</package>
+<presentation>
+<reflist>
+<ref refid="fff1c1a8-66fc-11e9-9b9f-597468372eb0"/>
+</reflist>
+</presentation>
+</Component>
+<Component id="017a5594-66fd-11e9-9b9f-597468372eb0">
+<name>
+<val>Toga_Impl</val>
+</name>
+<package>
+<ref refid="fcb62a06-66fc-11e9-9b9f-597468372eb0"/>
+</package>
+<presentation>
+<reflist>
+<ref refid="017ab03e-66fd-11e9-9b9f-597468372eb0"/>
+</reflist>
+</presentation>
+</Component>
+<Comment id="5e029024-66fd-11e9-9b9f-597468372eb0">
+<body>
+<val>Implementation
+Layer</val>
+</body>
+<presentation>
+<reflist>
+<ref refid="5e02b07c-66fd-11e9-9b9f-597468372eb0"/>
+</reflist>
+</presentation>
+</Comment>
+<Comment id="9deb00c2-66fd-11e9-9b9f-597468372eb0">
+<body>
+<val>Interface
+Layer</val>
+</body>
+<presentation>
+<reflist>
+<ref refid="9deb2e44-66fd-11e9-9b9f-597468372eb0"/>
+</reflist>
+</presentation>
+</Comment>
+<Comment id="ae76f536-66fd-11e9-9b9f-597468372eb0">
+<body>
+<val>Native
+Layer</val>
+</body>
+<presentation>
+<reflist>
+<ref refid="ae772b5a-66fd-11e9-9b9f-597468372eb0"/>
+</reflist>
+</presentation>
+</Comment>
+</gaphor>

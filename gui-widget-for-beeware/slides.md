@@ -47,37 +47,35 @@ def main():
 
 ---
 
-# Current Status
+# Background
 
-* Solid proof of concept
-* Open Source (BSD)
-* 400+ contributors
-
----
-
-# Toga Widget
-
-* The controls and logic that a user interacts with when using a GUI
+A widget is the controls and logic that a user interacts with when using a GUI
 
 ![Example Widgets](images/toga-widgets.png)
 <!-- .element style="border: 0; box-shadow: None" -->
 
-* A Canvas widget will be used as an example
+A Canvas widget will be used as an example
 
 ---
 
-# Internal layers
+# Toga Blackbox
 
-* The **Interface** layer
-
-* The **Implementation** layer
-
-* The **Native** layer
+![Context Diagram](images/toga-blackbox.svg)
+<!-- .element style="border: 0; box-shadow: None" -->
 
 ---
 
-<section data-background="/images/toga-architecture.svg" data-background-size="contain">
-</section>
+# Toga Whitebox
+
+![Context Diagram](images/toga-whitebox.svg)
+<!-- .element style="border: 0; box-shadow: None" -->
+
+---
+
+# Toga_Impl Factory Pattern
+
+![Factory Pattern](images/factory-pattern.svg)
+<!-- .element style="border: 0; box-shadow: None" -->
 
 ---
 
@@ -114,34 +112,6 @@ root.mainloop()
 Create, Configure, Pack, and Bind
 
 ---
-## Research your widget
-wxPython
-
-![Research Examples](images/research-wx.svg)
-<!-- .element style="border: 0; box-shadow: None" -->
-
-Notes:
-wx.Panel.Bind(wx.EVT_PAINT, OnPaint)
-def OnPaint(self, evt):
-    dc = wx.PaintDC()
-    dc.SetBrush(wx.Brush(wx.Colour(200, 0, 0)))
-    dc.DrawRectangle(10, 10, 100, 100)
-
----
-
-## Research your widget
-HTML canvas
-
-![Research Examples](images/research-html.svg)
-<!-- .element style="border: 0; box-shadow: None" -->
-
-Notes:
-var c = document.getElementById("myCanvas");
-var ctx = c.getContext("2d");
-ctx.fillStyle = "rgb(200, 0, 0)";
-ctx.fillRect(10, 10, 100, 100);
-
----
 
 ## Research your widget
 GTK
@@ -156,6 +126,14 @@ def draw(da, ctx):
     ctx.set_source_rgb(200, 0, 0)
     ctx.rectangle(10, 10, 100, 100)
     ctx.fill()
+
+---
+
+##  Research your widget
+Use Cases
+
+![Use Cases](images/usecases.svg)
+<!-- .element style="border: 0; box-shadow: None" -->
 
 ---
 
@@ -205,25 +183,11 @@ class Canvas(Context, Widget):
      """
 
 ---
-## Write Code Outline
-
-![Canvas Outline](images/outline-canvas.svg)
-<!-- .element style="border: 0; box-shadow: None" -->
-
-Notes:
-def rect(self, x, y, width, height):
-    """Constructs and returns a :class:`Rect <Rect>`.
-
-    Args:
-        x (float): x coordinate for the rectangle.
-	...
-    """
-
----
 
 # Step 3
 
-## Implement Toga_core (with TDD)
+## Implement Toga_core
+### (with TDD)
 * Write a test for each function of the widget outlined in the API from Step 2
 * Check that the tests fail
 * Specify the implementation layer API
