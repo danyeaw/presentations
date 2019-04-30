@@ -21,11 +21,19 @@
 </script></section><section  data-markdown><script type="text/template">
 BeeWare is
 
-Software libraries for cross-platform native app development from a single Python codebase
+### Cross-platform
+### Native
+### App development
+### with Python
 
 and
 
-Tools to simplify app deployment
+### Simple app deployment
+
+</script></section><section  data-markdown><script type="text/template"># Toga
+## Beeware's GUI Toolkit
+![Toga](images/tiberius-512.png)
+<!-- .element style="border: 0; box-shadow: None" -->
 </script></section><section  data-markdown><script type="text/template">
 # Hello World
 
@@ -56,9 +64,22 @@ A Canvas widget will be used as an example
 ![Context Diagram](images/toga-blackbox.svg)
 <!-- .element style="border: 0; box-shadow: None" -->
 </script></section><section  data-markdown><script type="text/template">
+# Bridge or Transpiler
+![Rubicon](images/rubicon.png)
+<!-- .element style="border: 0; box-shadow: None" -->
+![VOC](images/voc-512.png)
+<!-- .element style="border: 0; box-shadow: None" height="256" -->
+![VOC](images/batavia-512.png)
+<!-- .element style="border: 0; box-shadow: None" height="256" -->
+</script></section><section  data-markdown><script type="text/template">
 # Toga Whitebox
 
 ![Context Diagram](images/toga-whitebox.svg)
+<!-- .element style="border: 0; box-shadow: None" -->
+</script></section><section  data-markdown><script type="text/template">
+# Nomenclature
+
+![Nomenclature](images/toga-impl-interface.svg)
 <!-- .element style="border: 0; box-shadow: None" -->
 </script></section><section  data-markdown><script type="text/template">
 # Toga_Impl Factory Pattern
@@ -112,7 +133,7 @@ Use Cases
 </script></section><section  data-markdown><script type="text/template">
 # Step 2
 
-## Interface layer: Pythonic API
+## Write Docs
 * Write your API documentation first
 * The API provides the set of clearly defined methods of communication (layers) between the software components
 * Documentation Driven Development
@@ -131,7 +152,7 @@ the screen using the <code>rect</code> drawing object:</p>
 canvas = toga.Canvas(style=Pack(flex=1))
 with canvas.fill(color=rgb(200, 0, 0)) as fill:
     fill.rect(10, 10, 100, 100)</p>
-</aside></script></section><section  data-markdown><script type="text/template">## Write Code Outline
+</aside></script></section><section  data-markdown><script type="text/template">## Write Code Outline / Docstrings
 ![Canvas Outline](images/outline-canvas.svg)
 <!-- .element style="border: 0; box-shadow: None" -->
 
@@ -149,10 +170,8 @@ with canvas.fill(color=rgb(200, 0, 0)) as fill:
 
 ## Implement Toga_core
 ### (with TDD)
-* Write a test for each function of the widget outlined in the API from Step 2
-* Check that the tests fail
-* Specify the implementation layer API
-* Write the core code for the widget to call the implementation layer
+* First write tests for Toga_core
+* Then code the outline created in Step 2
 </script></section><section  data-markdown><script type="text/template">
 ## Write tests for Toga_core
 
@@ -230,14 +249,39 @@ def rect(self, x, y, width, height):
 <aside class="notes"><p>class Canvas(Widget):
     def create(self):
         self.native = Gtk.DrawingArea()
-        self.native.interface = self.interface
         self.native.connect(&quot;draw&quot;, self.gtk_draw_callback)</p>
 <pre><code>def gtk_draw_callback(self, canvas, gtk_context):
     self.interface._draw(self, draw_context=gtk_context)
 
 def rect(self, x, y, width, height, draw_context):
     draw_context.rectangle(x, y, width, height)
-</code></pre></aside></script></section><section  data-markdown><script type="text/template"># ![](images/tutorial-4.png)  
+</code></pre></aside></script></section><section  data-markdown><script type="text/template">
+## Implement Toga_impl
+### other platforms
+
+![Canvas Outline](images/toga_impl-cocoa-backend.svg)
+<!-- .element style="border: 0; box-shadow: None" -->
+    
+<aside class="notes"><p>class TogaCanvas(NSView):
+    @objc<em>method
+    def drawRect</em>(self, rect: NSRect) -&gt; None:
+        context = NSGraphicsContext.currentContext.graphicsPort()</p>
+<p>class Canvas(Widget):
+    def create(self):
+        self.native = TogaCanvas.alloc().init()</p>
+<pre><code>def rect(self, x, y, width, height, draw_context, *args, **kwargs):
+    rectangle = CGRectMake(x, y, width, height)
+    core_graphics.CGContextAddRect(draw_context, rectangle
+</code></pre></aside></script></section><section  data-markdown><script type="text/template">
+
+# ![](images/tutorial-4.png)  
+
+1. Research Your Widget
+2. Write Docs
+3. Toga_core
+4. Toga_impl - Dummy Backend
+5. Toga_impl - Your Platform
+</script></section><section  data-markdown><script type="text/template">
 ## Submit a pull request!  
   
 ## 🎉👍💖
