@@ -17,11 +17,21 @@ revealOptions:
 
 BeeWare is
 
-Software libraries for cross-platform native app development from a single Python codebase
+### Cross-platform
+### Native
+### App development
+### with Python
 
 and
 
-Tools to simplify app deployment
+### Simple app deployment
+
+
+---
+# Toga
+## Beeware's GUI Toolkit
+![Toga](images/tiberius-512.png)
+<!-- .element style="border: 0; box-shadow: None" -->
 
 ---
 
@@ -65,9 +75,26 @@ A Canvas widget will be used as an example
 
 ---
 
+# Bridge or Transpiler
+![Rubicon](images/rubicon.png)
+<!-- .element style="border: 0; box-shadow: None" -->
+![VOC](images/voc-512.png)
+<!-- .element style="border: 0; box-shadow: None" height="256" -->
+![VOC](images/batavia-512.png)
+<!-- .element style="border: 0; box-shadow: None" height="256" -->
+
+---
+
 # Toga Whitebox
 
 ![Context Diagram](images/toga-whitebox.svg)
+<!-- .element style="border: 0; box-shadow: None" -->
+
+---
+
+# Nomenclature
+
+![Nomenclature](images/toga-impl-interface.svg)
 <!-- .element style="border: 0; box-shadow: None" -->
 
 ---
@@ -139,7 +166,7 @@ Use Cases
 
 # Step 2
 
-## Interface layer: Pythonic API
+## Write Docs
 * Write your API documentation first
 * The API provides the set of clearly defined methods of communication (layers) between the software components
 * Documentation Driven Development
@@ -166,7 +193,7 @@ with canvas.fill(color=rgb(200, 0, 0)) as fill:
     fill.rect(10, 10, 100, 100)
 
 ---
-## Write Code Outline
+## Write Code Outline / Docstrings
 ![Canvas Outline](images/outline-canvas.svg)
 <!-- .element style="border: 0; box-shadow: None" -->
 
@@ -188,10 +215,8 @@ class Canvas(Context, Widget):
 
 ## Implement Toga_core
 ### (with TDD)
-* Write a test for each function of the widget outlined in the API from Step 2
-* Check that the tests fail
-* Specify the implementation layer API
-* Write the core code for the widget to call the implementation layer
+* First write tests for Toga_core
+* Then code the outline created in Step 2
 
 ---
 
@@ -290,7 +315,6 @@ Notes:
 class Canvas(Widget):
     def create(self):
         self.native = Gtk.DrawingArea()
-        self.native.interface = self.interface
         self.native.connect("draw", self.gtk_draw_callback)
     
     def gtk_draw_callback(self, canvas, gtk_context):
@@ -300,7 +324,40 @@ class Canvas(Widget):
         draw_context.rectangle(x, y, width, height)
 
 ---
+
+## Implement Toga_impl
+### other platforms
+
+![Canvas Outline](images/toga_impl-cocoa-backend.svg)
+<!-- .element style="border: 0; box-shadow: None" -->
+    
+Notes:
+class TogaCanvas(NSView):
+    @objc_method
+    def drawRect_(self, rect: NSRect) -> None:
+        context = NSGraphicsContext.currentContext.graphicsPort()
+
+
+class Canvas(Widget):
+    def create(self):
+        self.native = TogaCanvas.alloc().init()
+
+    def rect(self, x, y, width, height, draw_context, *args, **kwargs):
+        rectangle = CGRectMake(x, y, width, height)
+        core_graphics.CGContextAddRect(draw_context, rectangle
+---
+
+
 # ![](images/tutorial-4.png)  
+
+1. Research Your Widget
+2. Write Docs
+3. Toga_core
+4. Toga_impl - Dummy Backend
+5. Toga_impl - Your Platform
+
+---
+
 ## Submit a pull request!  
   
 ## 🎉👍💖

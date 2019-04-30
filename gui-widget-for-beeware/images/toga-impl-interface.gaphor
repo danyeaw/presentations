@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gaphor xmlns="http://gaphor.sourceforge.net/model" version="3.0" gaphor-version="1.0.1">
+<Package id="fcb62a06-66fc-11e9-9b9f-597468372eb0">
+<name>
+<val>New model</val>
+</name>
+<ownedClassifier>
+<reflist>
+<ref refid="fff15ba0-66fc-11e9-9b9f-597468372eb0"/>
+<ref refid="017a5594-66fd-11e9-9b9f-597468372eb0"/>
+</reflist>
+</ownedClassifier>
+<ownedDiagram>
+<reflist>
+<ref refid="fcb62e70-66fc-11e9-9b9f-597468372eb0"/>
+</reflist>
+</ownedDiagram>
+</Package>
+<Diagram id="fcb62e70-66fc-11e9-9b9f-597468372eb0">
+<name>
+<val>main</val>
+</name>
+<package>
+<ref refid="fcb62a06-66fc-11e9-9b9f-597468372eb0"/>
+</package>
+<canvas>
+<item id="fff1c1a8-66fc-11e9-9b9f-597468372eb0" type="ComponentItem">
+<drawing-style>
+<val>2</val>
+</drawing-style>
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 136.0126953125, 73.98330688476562)</val>
+</matrix>
+<width>
+<val>137.0</val>
+</width>
+<height>
+<val>50.0</val>
+</height>
+<subject>
+<ref refid="fff15ba0-66fc-11e9-9b9f-597468372eb0"/>
+</subject>
+<show_stereotypes_attrs>
+<val>0</val>
+</show_stereotypes_attrs>
+</item>
+<item id="017ab03e-66fd-11e9-9b9f-597468372eb0" type="ComponentItem">
+<drawing-style>
+<val>2</val>
+</drawing-style>
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 420.03759765625, 73.98330688476562)</val>
+</matrix>
+<width>
+<val>136.0</val>
+</width>
+<height>
+<val>50.0</val>
+</height>
+<subject>
+<ref refid="017a5594-66fd-11e9-9b9f-597468372eb0"/>
+</subject>
+<show_stereotypes_attrs>
+<val>0</val>
+</show_stereotypes_attrs>
+</item>
+<item id="48b1b90c-66fd-11e9-9b9f-597468372eb0" type="Line">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 273.0126953125, 98.98330688476562)</val>
+</matrix>
+<orthogonal>
+<val>0</val>
+</orthogonal>
+<horizontal>
+<val>0</val>
+</horizontal>
+<points>
+<val>[(0.0, 0.0), (147.02490234375, 0.0)]</val>
+</points>
+</item>
+<item id="bd673ec2-6ae8-11e9-9770-6dd35e2ccff3" type="DependencyItem">
+<show_stereotypes_attrs>
+<val>0</val>
+</show_stereotypes_attrs>
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 420.7470703125, 51.555206298828125)</val>
+</matrix>
+<orthogonal>
+<val>0</val>
+</orthogonal>
+<horizontal>
+<val>0</val>
+</horizontal>
+<points>
+<val>[(0.0, 0.0), (-149.76025390625, 0.561553955078125)]</val>
+</points>
+<auto_dependency>
+<val>1</val>
+</auto_dependency>
+</item>
+<item id="e09f83e0-6ae8-11e9-9770-6dd35e2ccff3" type="CommentItem">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 317.3974609375, 20.262359619140625)</val>
+</matrix>
+<width>
+<val>54.0</val>
+</width>
+<height>
+<val>27.0</val>
+</height>
+<subject>
+<ref refid="e09f389a-6ae8-11e9-9770-6dd35e2ccff3"/>
+</subject>
+<show_stereotypes_attrs>
+<val>0</val>
+</show_stereotypes_attrs>
+</item>
+<item id="f47312ec-6ae8-11e9-9770-6dd35e2ccff3" type="DependencyItem">
+<show_stereotypes_attrs>
+<val>0</val>
+</show_stereotypes_attrs>
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 269.196044921875, 162.080078125)</val>
+</matrix>
+<orthogonal>
+<val>0</val>
+</orthogonal>
+<horizontal>
+<val>0</val>
+</horizontal>
+<points>
+<val>[(0.0, 0.0), (156.8055419921875, 0.634552001953125)]</val>
+</points>
+<auto_dependency>
+<val>1</val>
+</auto_dependency>
+</item>
+<item id="09303b24-6ae9-11e9-9770-6dd35e2ccff3" type="CommentItem">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 307.690673828125, 129.311767578125)</val>
+</matrix>
+<width>
+<val>83.0</val>
+</width>
+<height>
+<val>27.0</val>
+</height>
+<subject>
+<ref refid="093006cc-6ae9-11e9-9770-6dd35e2ccff3"/>
+</subject>
+<show_stereotypes_attrs>
+<val>0</val>
+</show_stereotypes_attrs>
+</item>
+</canvas>
+</Diagram>
+<Component id="fff15ba0-66fc-11e9-9b9f-597468372eb0">
+<name>
+<val>Toga_Core</val>
+</name>
+<package>
+<ref refid="fcb62a06-66fc-11e9-9b9f-597468372eb0"/>
+</package>
+<presentation>
+<reflist>
+<ref refid="fff1c1a8-66fc-11e9-9b9f-597468372eb0"/>
+</reflist>
+</presentation>
+</Component>
+<Component id="017a5594-66fd-11e9-9b9f-597468372eb0">
+<name>
+<val>Toga_Impl</val>
+</name>
+<package>
+<ref refid="fcb62a06-66fc-11e9-9b9f-597468372eb0"/>
+</package>
+<presentation>
+<reflist>
+<ref refid="017ab03e-66fd-11e9-9b9f-597468372eb0"/>
+</reflist>
+</presentation>
+</Component>
+<Comment id="e09f389a-6ae8-11e9-9770-6dd35e2ccff3">
+<body>
+<val>impl</val>
+</body>
+<presentation>
+<reflist>
+<ref refid="e09f83e0-6ae8-11e9-9770-6dd35e2ccff3"/>
+</reflist>
+</presentation>
+</Comment>
+<Comment id="093006cc-6ae9-11e9-9770-6dd35e2ccff3">
+<body>
+<val>interface</val>
+</body>
+<presentation>
+<reflist>
+<ref refid="09303b24-6ae9-11e9-9770-6dd35e2ccff3"/>
+</reflist>
+</presentation>
+</Comment>
+</gaphor>
