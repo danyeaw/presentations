@@ -80,7 +80,7 @@ A Canvas widget will be used as an example
 <!-- .element style="border: 0; box-shadow: None" -->
 ![VOC](images/voc-512.png)
 <!-- .element style="border: 0; box-shadow: None" height="256" -->
-![VOC](images/batavia-512.png)
+![Batavia](images/batavia-512.png)
 <!-- .element style="border: 0; box-shadow: None" height="256" -->
 
 ---
@@ -92,9 +92,9 @@ A Canvas widget will be used as an example
 
 ---
 
-# Nomenclature
+# More Terms
 
-![Nomenclature](images/toga-impl-interface.svg)
+![More Terms](images/toga-impl-interface.svg)
 <!-- .element style="border: 0; box-shadow: None" -->
 
 ---
@@ -116,8 +116,9 @@ A Canvas widget will be used as an example
 
 # Step 1
 ## Research your widget
-* How do you create this widget on different platforms
-* Think, brainstorm, whiteboard, and discuss how you would want to create and manipulate this widget with Python
+* Abstraction requires knowledge of specific examples
+* Create use cases or user stories
+* Get feedback
 
 ---
 ## Research your widget
@@ -347,20 +348,19 @@ class Canvas(Widget):
         core_graphics.CGContextAddRect(draw_context, rectangle
 ---
 
-
+## Submit a pull request!  
+  
 # ![](images/tutorial-4.png)  
+## 🎉👍💖
 
+---
+
+# Summary
 1. Research Your Widget
 2. Write Docs
 3. Toga_core
 4. Toga_impl - Dummy Backend
 5. Toga_impl - Your Platform
-
----
-
-## Submit a pull request!  
-  
-## 🎉👍💖
 
 ---
 
