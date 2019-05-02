@@ -18,7 +18,20 @@
 
 ![BeeWare Logo](images/beeware-logo.png)
 <!-- .element style="border: 0; box-shadow: None" -->
-</script></section><section  data-markdown><script type="text/template">
+
+<aside class="notes"><p>Hi my name is Dan Yeaw. I work for Ford Motor Company where I help
+design safety in to complex software-based automated and electrified
+technologies. In my free time, I have been working on an open source tool
+used to model these complex system designs.</p>
+<p>Eventually I got really frustrated with the current set of GUI toolkits
+that are available for Python. I want the ability to write an app once
+and have it look and feel great on all of my devices, but instead I was
+dealing with toolkits that are wrapped or introspected around C or C++
+libraries, or visually look like a blast from past. They made me feel like I 
+was going against the grain of Python instead of writing great Pythonic code.</p>
+<p>I am currently a core contributor to the BeeWare project, and I am so excited
+to talk to you about 5 Steps to Build Python Native GUI Widgets for BeeWare.</p>
+</aside></script></section><section  data-markdown><script type="text/template">
 BeeWare is
 
 ### Cross-platform
@@ -34,7 +47,15 @@ and
 ## Beeware's GUI Toolkit
 ![Toga](images/tiberius-512.png)
 <!-- .element style="border: 0; box-shadow: None" -->
-</script></section><section  data-markdown><script type="text/template">
+
+<aside class="notes"><p>Solid proof of concept
+Creating a simple app on macOS, Linux, or iOS is definitely possible.</p>
+<p>This alpha status may not be so exciting for you if you are just trying to
+build an app, but I think it is very exciting for those that want to
+contribute to an open source project. Although there are many ways to get
+involved, users keep asking how they can build a GUI widget that isn&#39;t yet
+supported. I think this is a great way to make a significant contribution.</p>
+</aside></script></section><section  data-markdown><script type="text/template">
 # Hello World
 
 ![Hello World Example](images/hello-world.svg)
@@ -69,7 +90,7 @@ A Canvas widget will be used as an example
 <!-- .element style="border: 0; box-shadow: None" -->
 ![VOC](images/voc-512.png)
 <!-- .element style="border: 0; box-shadow: None" height="256" -->
-![VOC](images/batavia-512.png)
+![Batavia](images/batavia-512.png)
 <!-- .element style="border: 0; box-shadow: None" height="256" -->
 </script></section><section  data-markdown><script type="text/template">
 # Toga Whitebox
@@ -77,9 +98,9 @@ A Canvas widget will be used as an example
 ![Context Diagram](images/toga-whitebox.svg)
 <!-- .element style="border: 0; box-shadow: None" -->
 </script></section><section  data-markdown><script type="text/template">
-# Nomenclature
+# More Terms
 
-![Nomenclature](images/toga-impl-interface.svg)
+![More Terms](images/toga-impl-interface.svg)
 <!-- .element style="border: 0; box-shadow: None" -->
 </script></section><section  data-markdown><script type="text/template">
 # Toga_Impl Factory Pattern
@@ -90,13 +111,14 @@ A Canvas widget will be used as an example
 # Step 0
 ## development platform
 * Normally pick the platform that you are most familiar with
-* macOS and Gtk+ are the most developed 👍
+* macOS and GTK are the most developed 👍
 * Is this a mobile only widget (camera, GPS, etc)?
 </script></section><section  data-markdown><script type="text/template">
 # Step 1
 ## Research your widget
-* How do you create this widget on different platforms
-* Think, brainstorm, whiteboard, and discuss how you would want to create and manipulate this widget with Python
+* Abstraction requires knowledge of specific examples
+* Create use cases or user stories
+* Get feedback
 </script></section><section  data-markdown><script type="text/template">## Research your widget
 Tkinter
 
@@ -156,7 +178,7 @@ with canvas.fill(color=rgb(200, 0, 0)) as fill:
 ![Canvas Outline](images/outline-canvas.svg)
 <!-- .element style="border: 0; box-shadow: None" -->
 
-<aside class="notes"><p>class Canvas(Context, Widget):
+<aside class="notes"><p>class Canvas(Widget):
     &quot;&quot;&quot;Create new canvas.</p>
 <pre><code>Args:
     id (str):  An identifier for this widget.
@@ -273,18 +295,20 @@ def rect(self, x, y, width, height, draw_context):
     rectangle = CGRectMake(x, y, width, height)
     core_graphics.CGContextAddRect(draw_context, rectangle
 </code></pre></aside></script></section><section  data-markdown><script type="text/template">
-
+# Iterate
+### Iterate through steps 1-5 to complete your widget implementation
+</script></section><section  data-markdown><script type="text/template">
+## Submit a pull request!  
+  
 # ![](images/tutorial-4.png)  
-
+## 🎉👍💖
+</script></section><section  data-markdown><script type="text/template">
+# Summary
 1. Research Your Widget
 2. Write Docs
 3. Toga_core
 4. Toga_impl - Dummy Backend
 5. Toga_impl - Your Platform
-</script></section><section  data-markdown><script type="text/template">
-## Submit a pull request!  
-  
-## 🎉👍💖
 </script></section><section  data-markdown><script type="text/template">
 @danyeaw  
   
