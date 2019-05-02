@@ -13,6 +13,22 @@ revealOptions:
 ![BeeWare Logo](images/beeware-logo.png)
 <!-- .element style="border: 0; box-shadow: None" -->
 
+Notes:
+
+Hi my name is Dan Yeaw. I work for Ford Motor Company where I help
+design safety in to complex software-based automated and electrified
+technologies. In my free time, I have been working on an open source tool
+used to model these complex system designs.
+
+Eventually I got really frustrated with the current set of GUI toolkits
+that are available for Python. I want the ability to write an app once
+and have it look and feel great on all of my devices, but instead I was
+dealing with toolkits that are wrapped or introspected around C or C++
+libraries, or visually look like a blast from past. They made me feel like I 
+was going against the grain of Python instead of writing great Pythonic code.
+
+I am currently a core contributor to the BeeWare project, and I am so excited
+to talk to you about 5 Steps to Build Python Native GUI Widgets for BeeWare.
 ---
 
 BeeWare is
@@ -32,6 +48,17 @@ and
 ## Beeware's GUI Toolkit
 ![Toga](images/tiberius-512.png)
 <!-- .element style="border: 0; box-shadow: None" -->
+
+Notes:
+
+Solid proof of concept
+Creating a simple app on macOS, Linux, or iOS is definitely possible.
+
+This alpha status may not be so exciting for you if you are just trying to
+build an app, but I think it is very exciting for those that want to
+contribute to an open source project. Although there are many ways to get
+involved, users keep asking how they can build a GUI widget that isn't yet
+supported. I think this is a great way to make a significant contribution.
 
 ---
 
@@ -109,7 +136,7 @@ A Canvas widget will be used as an example
 # Step 0
 ## development platform
 * Normally pick the platform that you are most familiar with
-* macOS and Gtk+ are the most developed 👍
+* macOS and GTK are the most developed 👍
 * Is this a mobile only widget (camera, GPS, etc)?
 
 ---
@@ -199,7 +226,7 @@ with canvas.fill(color=rgb(200, 0, 0)) as fill:
 <!-- .element style="border: 0; box-shadow: None" -->
 
 Notes:
-class Canvas(Context, Widget):
+class Canvas(Widget):
     """Create new canvas.
 
     Args:
@@ -346,6 +373,11 @@ class Canvas(Widget):
     def rect(self, x, y, width, height, draw_context, *args, **kwargs):
         rectangle = CGRectMake(x, y, width, height)
         core_graphics.CGContextAddRect(draw_context, rectangle
+---
+
+# Iterate
+### Iterate through steps 1-5 to complete your widget implementation
+
 ---
 
 ## Submit a pull request!  
