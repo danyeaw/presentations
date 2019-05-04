@@ -157,7 +157,7 @@ Tkinter
 Notes:
 import tkinter as tk
 
-root = Tk()
+root = tk.Tk()
 canvas = tk.Canvas()
 canvas.create_rectangle(10, 10, 100, 100, fill="red")
 canvas.pack()
