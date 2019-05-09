@@ -63,9 +63,8 @@ supported. I think this is a great way to make a significant contribution.
 ---
 
 # Hello World
-
 ![Hello World Example](images/hello-world.svg)
-<!-- .element style="border: 0; height: 500px; box-shadow: None" -->
+<!-- .element style="border: 0; height: 600px; box-shadow: None" -->
 
 Notes:
 import toga
