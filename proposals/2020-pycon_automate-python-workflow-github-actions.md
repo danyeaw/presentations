@@ -101,11 +101,11 @@ approximate timing in the outline, and I am confident in the timing and
 the content. I am also scheduled to discuss the content for this talk on the
 [Test & Code podcast](https://testandcode.com/) in January 2020.
 
-Last year, I gave my first talk at PyCon on 5 Steps to Build Python Native GUI
-Widgets for BeeWare. The talk was well attended, and as of December 2019 it has
-about 2700 views, which is in the top 1/3 of videos from PyCon 2019. I learned
-a lot during this experience, and I am excited to make my talk this year even
-better.
+Last year, I gave my first talk at PyCon on [5 Steps to Build Python Native GUI
+Widgets for BeeWare](https://www.youtube.com/watch?v=sWt_sEZUiY8). The talk was
+well attended, and as of December 2019 it has about 2700 views, which is in the
+top 1/3 of videos from PyCon 2019. I learned a lot during this experience, and
+I am excited to make my talk this year even better.
 
 I am also the organizer of the Michigan Python meetup, and I have given two
 other talks on BeeWare at the Michigan Python User Group (MICHIPUG) and Eastern
