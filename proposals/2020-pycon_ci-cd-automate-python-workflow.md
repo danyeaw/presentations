@@ -22,10 +22,10 @@ spend more time on your projects focusing on implementing new features and
 other enjoyable parts of programming, and less time doing manual and boring
 project maintenance?
 
-This talk gives an overview of CI/CD, a short history of CI/CD providers and
-what features to look for, and walks you through how you can easily setup a
-CI/CD pipeline for your Python library or application using GitHub Actions as
-an example.
+This talk gives an overview of Continuous Integration / Continuous Delivery
+(CI/CD), a short history of CI/CD providers and what features to look for, and
+walks you through how you can easily setup a CI/CD pipeline for your Python
+library or application using GitHub Actions as an example.
 
 At the end of this talk, you should be able to set up a CI/CD pipeline
 for your Python projects to test, package, and deploy your Python library or
@@ -36,10 +36,9 @@ application.
 I am aiming this talk at individuals who want to get started with automating
 parts of their Python workflow including CI/CD. Attendees will require basic
 familiarity with Python programming and Git workflows, but don’t require any
-experience with CI/CD. Experienced Python programmers and programmers
-who have set up CI/CD pipeline, should still benefit from seeing how they can
-translate their previous knowledge into being able to set up CI/CD on projects
-in the future more quickly.
+experience with CI/CD. Experienced Python programmers and programmers who have
+set up a CI/CD pipeline, should still benefit from being able to set up CI/CD
+on projects in the future more quickly.
 
 This talk will use the Briefcase packaging library, and a simple application as
 examples to teach fundamental knowledge about CI/CD:
@@ -62,8 +61,8 @@ to a configuration. This can result in slow and tedious debugging.
 The audience will leave with the ability and tools to contribute CI/CD to any
 major software project. I hope that a subset of the audience will be interested
 in contributing improvements to open source projects by helping to automate
-CI/CD for BeeWare and other projects at the PyCon Sprints, using the knowledge
-in this presentation.
+CI/CD for BeeWare and other projects at the PyCon Sprints, while using knowledge
+from this presentation.
 
 # Outline
 1. Intro (5 min total)
@@ -94,7 +93,7 @@ Total time: 25 minutes with 5 minutes for questions
 
 I gave a similar presentation at the Michigan Python meetup in November 2019
 and I received really great feedback about it. The talk ran to the approximate
-timing a similar outline, and I am confident in the timing and the content. I
+timing for a similar outline, and I am confident in the timing and the content. I
 am also scheduled to discuss similar content as this talk on the [Test & Code
 podcast](https://testandcode.com/) in January 2020.
 
@@ -115,11 +114,11 @@ to 60 attendees each.
 
 I have posted similar
 [slides](https://dan.yeaw.me/slides/github-actions-automate-your-python-development-workflow/index.html#/)
-and [blog
+and a [blog
 post](https://dan.yeaw.me/posts/github-actions-automate-your-python-development-workflow/)
 for this talk. I will be de-emphasizing GitHub Actions and focusing more on
 CI/CD in general, while using GitHub Actions as an example.
 
-[Briefcase](https://github.com/beeware/briefcase) will be used for the
+[Briefcase](https://github.com/beeware/briefcase), which will be used for the
 library example, is open source and part of the [BeeWare](https://beeware.org)
 project.
