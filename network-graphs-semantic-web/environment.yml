@@ -1,0 +1,16 @@
+name: pokedex2
+channels:
+  - defaults
+dependencies:
+  - python=3.8
+  - pip
+  - matplotlib
+  - scipy
+  - networkx
+  - pandas
+  - ipython
+  - ipykernel
+  - pip:
+    - rdflib
+    - pyvis
+prefix: C:\Users\dan\anaconda3\envs\pokedex2

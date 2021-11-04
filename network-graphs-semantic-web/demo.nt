@@ -1,0 +1,2 @@
+<http://michiganpython.org/dan> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+<httpss://michiganpython.org/dan> <https://michiganpython.org/says> "Hello World" .
