@@ -5,3 +5,5 @@
 [Michigan Python](https://michiganpython.org)
 - [Modeling Complex Systems in Python with Gaphor](https://youtu.be/J1k9GTmYwkc)
 - [Intro to Typing and MyPy](https://youtu.be/9rCXqeXKHJw)
+- [Network Graphs and the Semantic Web with Python](https://www.youtube.com/watch?v=eEJYCaug5Zo)
+- [Build GUI Apps with Python and GTK](https://www.youtube.com/watch?v=Ko0NTS0IpfI)
