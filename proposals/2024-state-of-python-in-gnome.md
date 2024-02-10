@@ -36,7 +36,7 @@ your talk, what you think the audience will get out of your talks, and if the to
 
 ### Who and Why (Audience)
 
-I am aiming this talk at individuals who want to understand the current state of Python in GNOME including some of the
+I am aiming this talk at individuals who want to understand the current state of Python in GNOME, including some of the
 new features. Attendees will require basic familiarity with Python programming and development of apps with GTK.
 Experienced GNOME developers should still benefit from seeing an overview of the status and some of the more advanced
 topics like fundamental type support.
@@ -53,7 +53,7 @@ This talk will be a mix of discussion about community building and technical top
 
 The audience will leave with a deeper understanding of PyGObject. I hope that a subset of the audience will be
 interested in getting involved and contributing enhancements, while using knowledge from this presentation to understand
-context of where things are and what some of the priorities are going forward.
+the context of where things are and what some of the priorities are going forward.
 
 ### Outline
 1. Intro (5 min total)
