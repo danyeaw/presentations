@@ -93,9 +93,10 @@ in-person classes with up to 150 attendees each.
 
 ## Author(s) Bio
 
-Maintainer of Gaphor, which is a GNOME Circle modeling app, PyGObject, and Gvsbuild. Leads Functional Safety at Ford
-Motor Company to help ensure the software and electronics in modern vehicles are safe. Organizer of Michigan Python.
-Would rather be riding bicycles.
+Dan Yeaw is a Senior Technical Manager for Functional Safety at Ford Motor Company, where he leads a team to ensure
+software and electronics in modern vehicles are safe. He is a GNOME Foundation member, and is a maintainer of Gaphor,
+a GNOME Circle modeling app, PyGObject, and Gvsbuild. He currently lives in Dearborn, Michigan, where he organizes the
+Michigan Python meetup, and enjoys spending time with his family and riding bicycles.
 
 ## Pronouns (not mandatory)
 
