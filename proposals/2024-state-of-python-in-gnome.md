@@ -44,7 +44,9 @@ topics like fundamental type support.
 This talk will be a mix of discussion about community building and technical topics.
 
 1. A reflection of how PyGObject got in an undermaintained state, and some ideas and opportunities for GNOME to support
-   projects to improve their contribution funnels that support maintaining the maintainers.
+   projects to improve their contribution funnels that support maintaining the maintainers. This will be both a celebration
+   of single maintainers of open source projects, like Christoph Reiter, who single-handedly kept PyGObject afloat for over
+   six years, and a discussion of community building so that more people can lend a hand.
    
 1. Technical discussion about recent improvements to PyGObject and some examples for how to take advantage of these
    enhancements in your own app.
