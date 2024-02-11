@@ -37,16 +37,16 @@ your talk, what you think the audience will get out of your talks, and if the to
 ### Who and Why (Audience)
 
 I am aiming this talk at individuals who want to understand the current state of Python in GNOME, including some of the
-new features. Attendees will require basic familiarity with Python programming and development of apps with GTK.
-Experienced GNOME developers should still benefit from seeing an overview of the status and some of the more advanced
-topics like fundamental type support.
+new features. Attendees will get the most out of the talk by having some basic familiarity with Python programming and
+development of apps with GTK. Experienced GNOME developers should still benefit from seeing an overview of the status
+and some of the more advanced topics like fundamental type support.
 
 This talk will be a mix of discussion about community building and technical topics.
 
-1. A reflection of how PyGObject got in an undermaintained state, and some ideas and opportunities for GNOME to support
-   projects to improve their contribution funnels that support maintaining the maintainers. This will be both a celebration
-   of single maintainers of open source projects, like Christoph Reiter, who single-handedly kept PyGObject afloat for over
-   six years, and a discussion of community building so that more people can lend a hand.
+1. A reflection of how PyGObject got in an undermaintained state, and some ideas and opportunities for us to better support
+   projects to improve their contribution funnels. This will be both a celebration of single maintainers of open source
+   projects, like Christoph Reiter, who single-handedly kept PyGObject afloat for over six years, and a discussion of
+   community building so that more people can lend a hand.
    
 1. Technical discussion about recent improvements to PyGObject and some examples for how to take advantage of these
    enhancements in your own app.
