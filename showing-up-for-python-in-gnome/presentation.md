@@ -18,9 +18,30 @@ Hi, I'm Dan Yeaw, and I'm sooo excited to talk to you about Showing up for Pytho
 
 :::
 
-## Python is a Mosiac
+## Unleashing Interests with Python
 
-Mosiac here.
+```python
+>>> import pypokedex
+>>> pokemon = pypokedex.get(name="Decidueye")
+>>> pokemon.name
+'decidueye'
+>>> pokemon.types
+['grass', 'ghost']
+>>> pokemon.base_stats
+BaseStats(hp=78, attack=107, defense=75, sp_atk=100, sp_def=100)
+```
+
+![](decidueye.jpg){height=25%}
+
+::: notes
+
+With a little help, my 10 year old son can figure out how make simple games and apps with it, his latest project is trying to make a Pokedex for Pokemon. He loves geeking out on Pokemon, and that it is so much fun to see people get deep in to their interests!
+
+Python is easy to learn, but hard to master - it scales easily with your skillset. It is such an important language for our ecosystem. It is often used by students, researchers, and non-professional programmers. It is used by artists, data scientists, web developers, sysadmins, and astronomers.  
+
+With Builder, Workbench, and Flatpak, it has never been easier to build an app for GNOME. This is the big tent, that we need, where we make room for and make it easy for all kinds of people to build small apps for their projects to geek out on their interests. Python is the perfect language this - so we need to make sure the GNOME experience with it lives up to this.
+
+:::
 
 ## GNOME Python
 
