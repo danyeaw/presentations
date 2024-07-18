@@ -35,7 +35,7 @@ BaseStats(hp=78, attack=107, defense=75, sp_atk=100, sp_def=100)
 
 ::: notes
 
-With a little help, my 10 year old son can figure out how make simple games and apps with it, his latest project is trying to make a Pokedex for Pokemon. He loves geeking out on Pokemon, and that it is so much fun to see people get deep in to their interests!
+With a little help, my 10 year old son can figure out how make simple games and apps with Python, his latest project is trying to make a Pokedex for Pokemon. He loves geeking out on Pokemon, and that it is so much fun to see people get deep in to their interests!
 
 Python is easy to learn, but hard to master - it scales easily with your skillset. It is such an important language for our ecosystem. It is often used by students, researchers, and non-professional programmers. It is used by artists, data scientists, web developers, sysadmins, and astronomers.  
 
@@ -46,15 +46,28 @@ With Builder, Workbench, and Flatpak, it has never been easier to build an app f
 ## GNOME Python
 
 - PyGObject is the GTK and related library bindings for Python
-- Successor to PyGTK that James Henstridge started in 1998
 
-## On Python
-
-"The current state of the Python bindings for GObject-based libraries is making it really hard to recommend using Python as a language for developing GTK and GNOME applications." Emmanuele Bassi (2022)
+![](app-icons.png){height=65%}
 
 ::: notes
 
-In December 2022, Emmanuele Bassi wrote a blog post called On Python with a call to action to get involved to help Christoph.
+PyGObject is Python in GNOME. It is the successor to PyGTK that James Henstridge started in 1998 that uses gobject-introspection directly to allow you to build GNOME apps using Python. If you see the patterns in the app icons here, those deep interests that people geek out on includes drawing and art, modeling, graphing, music, genealogy, manga, classic gaming, and scientific reports.
+
+:::
+
+## On PyGObject
+
+> The current state of the Python bindings for GObject-based libraries is making it really hard to recommend using Python as a language for developing GTK and GNOME applications.
+
+Emmanuele Bassi (2022)
+
+::: notes
+
+In December 2022, Emmanuele Bassi wrote a blog post called "On PyGObject" with a call to action to get involved to help Christoph Reiter, the maintainer of the library. He went through 3 large use cases of features missing in PyGObject which was really make it hard to recommend. These included:
+
+1. Typed Instances for things like GtkExpression, GtkRenderNode, and GtkEvent. These Foundational Types were supported since they aren't based on GObjects.
+2. The base wrapper for GObject itself is written in Python instead of using gobject-introspection directly. However, this means that constructing and disposing of objects can be difficult because PyGObject doesn't automatically get access to the functions for doing those operations.
+3. Documentation is spread out everywhere, and a lot of it wasn't updated for GTK4.
 
 :::
 
@@ -62,16 +75,34 @@ In December 2022, Emmanuele Bassi wrote a blog post called On Python with a call
 
  ![PyGObject Commits Over Time](commits-over-time.png)
 
-- Major contributors like Simon Feltman, John Palmieri, and Martin Pitt left the project.
+- Major contributors left the project over time.
 - Christoph Reiter heroically held things together since 2017.
 - However, the number of changes started to fall off, especially after 2020.
+
+::: notes
+
+You can see the pattern of this in the commit history, although it isn't the only or even most important indicator of community health. Major contributors like Simon Feltman, John Palmieri, and Martin Pitt left the project - which is a natural part of open source. Christoph kept the fires burning late in to the nights, but he was also working on other important open source projects like MSYS2. PyGObject was mostly idling along with absolutely necessary changes only. This is also the same time frame that GTK4 was released, so there was a lot of changes going on in the wider ecosystem of libraries.
+
+:::
 
 ## Getting Involved in an Undermaintained Project
 
 - Contributing to an undermaintained project can be difficult
 - Each extra contribution is placing a burden on the developer
 - Timely feedback to contributions is often not possible
-- To outsiders GNOME as a project can sometimes feel hard to join, especially in these undermaintained areas
+- To outsiders, the GNOME project can feel hard to join, especially in these undermaintained areas
+
+::: notes
+
+Major open source projects really need a contribution funnel to get more people involved. This type of community building requires many hands to help newcomers, triage issues, review contributions, answer questions, and provide support.
+
+Unfortunately, it is all too common to have one person trying to hold everything together on multiple projects. However, this is a catch-22, that one person is barely holding things together, and each issue raised, each merge request submitted is extra work and burden for them.
+
+It doesn't feel welcoming to new people if they show up to help and their contributions dead rot, it is natural to move along and spend your time on things that you feel are making a difference.
+
+Since GNOME is a whole project and developer access is across the project, this adds an extra layer of complexity to try to figure out how to get through. For an undermaintained project, it can feel like the GNOME community is behind a city wall, and your knocking on the unmanned gate trying join.
+
+:::
 
 ## Community Building
 
@@ -88,6 +119,12 @@ Since GNOME as a project is made up of volunteers and individuals paid by compan
 
 # The State of Python in GNOME
 
+::: notes
+
+Let's switch gears a bit, over the last year, PyGObject has made some significant improvements!
+
+:::
+
 ## Issue and Merge Request Triage
 
 - Closed about 200 issues
@@ -95,15 +132,10 @@ Since GNOME as a project is made up of volunteers and individuals paid by compan
 - Open or draft merge requests went from 30 to 19
 
 ::: notes
-A clean issue backlog is important for a thriving community. We made some major in roads over the last year to reduce the total open issue and merge request counts.
-:::
+Let's start with the basics! A clean issue and merge request backlog is important for a thriving community. We made some major inroads over the last year to reduce the total open issue and merge request counts.
 
-## https://pygobject.gnome.org
+Although we haven't quite got all the way to just the subset that we are really going to work on, issues in this 100-200 range feels good - something that contributors can get their head around. Much more than this often feels overwhelming.
 
-Screenshot here!
-
-::: notes
-We use to have the pygobject docs hosted on read the docs. Rafael Mardojai also had a really nice PyGObject-Guide which was a tutorial based on the Python GTK+3 Tutorial by Sebastian Pölsterl. We worked with the communities to convert the projects from the GNU Free Documentation License to the LGPL, merged the tutorials with the other docs, and moved them to a more official pygobject.gnome.org subdomain.
 :::
 
 ## Fundamental Types
@@ -123,10 +155,21 @@ def window():
 ```
 
 ::: notes
-Now Python developers can finally use instances of fundamental types, which was one of the big blockers for people implementing custom widgets with GTK4. This original work was starting in 2010, and Arjan Molenaar brushed it off and implemented it this year.
+This fixes use case number 1 from the On PyGObject blog post. Now Python developers can finally use instances of fundamental types, which was one of the big blockers for people implementing custom widgets with GTK4. This original work was starting in 2010, and Arjan Molenaar brushed it off and implemented it this year.
 
 This fixes a ton of low level issues. you’ll be able to do advanced custom drawing using render nodes, as well as accessing low level windowing system event objects, in your Python applications.
+
 :::
+
+## https://pygobject.gnome.org
+
+![](docs-screenshot.png)
+
+::: notes
+We use to have the pygobject docs hosted on read the docs. Rafael Mardojai also had a really nice PyGObject-Guide which was a tutorial based on the Python GTK+3 Tutorial by Sebastian Pölsterl. We worked with the communities to convert the projects from the GNU Free Documentation License to the LGPL, merged the tutorials with the other docs, and moved them to a more official pygobject.gnome.org subdomain.
+:::
+
+
 
 ## meson-python and PDM
 
