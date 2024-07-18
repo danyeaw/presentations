@@ -31,7 +31,15 @@ Hi, I'm Dan Yeaw, and I'm sooo excited to talk to you about Showing up for Pytho
 BaseStats(hp=78, attack=107, defense=75, sp_atk=100, sp_def=100)
 ```
 
+```{=latex}
+\begin{center}
+```
+
 ![](decidueye.jpg){height=25%}
+
+```{=latex}
+\end{center}
+```
 
 ::: notes
 
@@ -105,8 +113,15 @@ Since GNOME is a whole project and developer access is across the project, this 
 :::
 
 ## Community Building
+```{=latex}
+\begin{center}
+```
 
-![](handbook.svg){width=80%}
+![](handbook.svg){height=50%}
+
+```{=latex}
+\end{center}
+```
 
 - The GNOME Project Handbook greatly improves clarity on how to get involved
 - The GNOME Foundation could also take a greater role
@@ -140,24 +155,127 @@ Although we haven't quite got all the way to just the subset that we are really 
 
 ## Fundamental Types
 
-```python
-def on_pressed(ctrl, n_press, x, y):
-    print(ctrl.get_current_event())
+- Most objects inherit from GObject
+- GtkExpression, GtkRenderNode, and GtkEvent do not
+- These are defined as a `GObject.TypeInstance`
 
+::: notes
 
-def window():
-    ctrl = Gtk.GestureClick()
-    ctrl.connect("pressed", on_pressed)
-    win = Gtk.Window.new()
-    win.add_controller(ctrl)
-    win.show()
-    return win
+GObject is the base type system and object class and is used for most of GTK and related libraries. Types are the fundamental part of a programming language like C, to translate a type like a char to the machine architecture with a minimum size like 8 bits and a maximum size. GLib provides a type system for GTK related libraries. Most of these types are fundamental types that are instantiated by GLib automatically, like a gchar. Most objects are created by inheriting from GObject to get memory management, properties like getters and setters, and construction/deconstruction of instances. However, not every piece of data used in a GTK application needs all that. So other fundamental types are created by defined by Gtk by defining a class and instance structure. Up until recently, PyGObject didn't support making use of these Fundamental types for data in your program like Expressions, RenderNodes, and Events. Let's jump in to an example!
+
+:::
+
+## Workbench Column View Example
+
+```{=latex}
+\begin{center}
+```
+
+![](column-view.png){height=85%}
+
+```{=latex}
+\end{center}
 ```
 
 ::: notes
-This fixes use case number 1 from the On PyGObject blog post. Now Python developers can finally use instances of fundamental types, which was one of the big blockers for people implementing custom widgets with GTK4. This original work was starting in 2010, and Arjan Molenaar brushed it off and implemented it this year.
+
+Workbench is this great app for learning and prototyping GNOME apps created by Sonny Piers and lots of contributions from the community to create tutorials in Vala, Python, Rust, and Javascript - I highly recommend it!! Here you can see the ColumnView example. ColumnView was added in GTK4 as an easier way to create a table of data. 
+
+Here is a list of books with title, author, and year. You can sort the columns by clicking on the column header, and also select a row which is shown in the light blue.
+
+For Gaphor, I would like to integrate a table view of MBSE diagrams for doing analysis. So I really wanted to make use of a ColumnView.
+
+:::
+
+## Sorting
+
+- Gtk provides an easy way to sort columns
+- Create a Sorter and then pass in a `Gtk.PropertyExpression`
+- `this -> item -> property`
+- Unfortunately, it isn't so easy without Fundamental Types
+
+::: notes
+
+As we saw in the ColumnView, being able to click on a column header to sort it is important or even expected functionality. For strings, sorting A-Z is needed and for numbers sorting high to low.
+
+Since this is a common use case, Gtk provides a straightforward way to enable this sorting using a type of Expression called a PropertyExpression. An Expression is a way to describe a reference to a value and a Property Expression does what it sounds like, it  provides a property value in an Expression.
+
+This is different than normal property bindings, because the object which is being bound doesn't have to exist when the expression is created. The expression is called `this`. It references an item, which has a property. The expression is getting the value of this property.
+
+It is still possible to sort columns without expressions, but it is a lot of work!
+
+:::
+
+## Sorting without Expressions - Creating a Sorting Model
+
+```python
+column_view = workbench.builder.get_object("column_view")
+col1 = workbench.builder.get_object("col1")
+col2 = workbench.builder.get_object("col2")
+col3 = workbench.builder.get_object("col3")
+
+model_func = lambda _item: None
+tree_model = Gtk.TreeListModel.new(ta_model, False, True, model_func)
+tree_sorter = Gtk.TreeListRowSorter.new(column_view.get_sorter())
+sorter_model = Gtk.SortListModel(model=tree_model, sorter=tree_sorter)
+selection = Gtk.SingleSelection.new(model=sorter_model)
+column_view.set_model(model=selection)
+```
+
+::: notes
+
 
 This fixes a ton of low level issues. you’ll be able to do advanced custom drawing using render nodes, as well as accessing low level windowing system event objects, in your Python applications.
+
+:::
+
+## Sorting without Expressions - Creating Sorting Logic
+
+```python
+def str_sorter(object_a, object_b, column):
+    a = getattr(object_a, column).lower()
+    b = getattr(object_b, column).lower()
+    return (a > b) - (a < b)
+
+def int_sorter(object_a, object_b, column):
+    a = getattr(object_a, column)
+    b = getattr(object_b, column)
+    return (a > b) - (a < b)
+
+col1.set_sorter(Gtk.CustomSorter.new(str_sorter, "title"))
+col2.set_sorter(Gtk.CustomSorter.new(str_sorter, "author"))
+col3.set_sorter(Gtk.CustomSorter.new(int_sorter, "year"))
+```
+
+::: notes
+
+Next we need to create our sorting logic. The first function we define is for sorting strings, like for the title and author columns. This function takes two objects and the column. It then gets both values using getattr, and sets them to lowercase so that the case of the string doesn't impact the sorting order.
+
+Then it compares the first character of the string based on the unicode ordinal value of the character. If they are the same, then it compares the next character. If a is larger than b, the function returns 1, and if b is larger than a it returns -1. The integer sorting function works the same, except no lowercase is needed and the integers are directly compared.
+
+Finally, we set the sorter of each column using Custom Sorters that we created. Wow, we did it, but that was a lot of work!
+
+:::
+
+## Sorting with Expressions
+
+```python
+col1_exp = Gtk.PropertyExpression.new(Book, None, "title")
+col2_exp = Gtk.PropertyExpression.new(Book, None, "author")
+col3_exp = Gtk.PropertyExpression.new(Book, None, "year")
+
+col1.sorter = Gtk.StringSorter.new(col1_exp)
+col2.sorter = Gtk.StringSorter.new(col2_exp)
+col3.sorter = Gtk.NumericSorter.new(col3_exp)
+```
+
+::: notes
+
+The implementation of Fundamental Types in PyGObject fixes use case number 1 from the On PyGObject blog post. The original work to support this was started in 2010, and Arjan Molenaar brushed it off and brought it home.
+
+Now we can make use of Expressions! Here we create three property expressions, pass in our Book class, None because we don't need to evaluate an extra Expression, and then the column name.
+
+Finally we set the sorter for each column to String Sorters for the title and author columns and Numeric Sorters for the year column and pass in the Property Expressions we just created. Said another way the sorter for each column is bound to the property of the book for that column.
 
 :::
 
