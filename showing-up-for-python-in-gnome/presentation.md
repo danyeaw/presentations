@@ -34,9 +34,7 @@ BaseStats(hp=78, attack=107, defense=75, sp_atk=100, sp_def=100)
 ```{=latex}
 \begin{center}
 ```
-
 ![](decidueye.jpg){height=25%}
-
 ```{=latex}
 \end{center}
 ```
@@ -284,27 +282,88 @@ Finally we set the sorter for each column to String Sorters for the title and au
 ![](docs-screenshot.png)
 
 ::: notes
+
 We use to have the pygobject docs hosted on read the docs. Rafael Mardojai also had a really nice PyGObject-Guide which was a tutorial based on the Python GTK+3 Tutorial by Sebastian Pölsterl. We worked with the communities to convert the projects from the GNU Free Documentation License to the LGPL, merged the tutorials with the other docs, and moved them to a more official pygobject.gnome.org subdomain.
+
 :::
 
+# Packaging and Development Environment Improvements
 
+## Legacy Packaging
 
-## meson-python and PDM
+- setup.py requires arbitrary code execution
+- pyproject.toml is a more explicit way to declare dependencies
 
-```bash
-meson setup _build
-meson test -C _build
+The steps to build a Python project then can be separated:
+
+1. Checkout the project
+2. Install the build system
+3. Execute the build
+
+::: notes
+
+The Python project configuration in setup.py files was the standard for a very long time and is still widely adopted. When Python first developed its tooling for building projects, distutils was the answer. As time went on, setuptools gained popularity to add some features on top of distutils. Both used the concept of a setup.py file that project maintainers executed to build and install the software.
+
+The downfall of this is there wasn't really a good way to declare what dependencies a project needs without running the setup.py file itself. The main Python install tool pip, was then executing arbitrary Python code just for pip to see the dependencies or to install a package.
+
+An advantage of this was as a project maintainer, you could customize your build system in the setup.py directly. But, let's move to a more modern alternative where we can break up our build steps to install the build system and then execute the build. 
+
+:::
+
+## meson-python
+
+meson-python is a build backend for Python leveraging Meson
+
+### pyproject.toml
+```toml
+[tool.meson-python.args]
+setup = ["-Dtests=false", "-Dwheel=true", "--wrap-mode=nofallback"]
+[build-system]
+build-backend = "mesonpy"
+requires = ["meson-python>=0.12.1", "pycairo>=1.16"]
 ```
 
-or
-
+### Build and Test
 ```bash
-pdm install
-pdm run pytest
+$ meson setup _build
+$ meson test -C _build
 ```
 
 ::: notes
-We moved from the legacy setup.py to the more modern pyproject.toml. We are using Meson for the build backend and using PDM to manage the project dependencies and virtualenvs.
+
+Meson is the standard build system used by GNOME projects, it is easy to use, powerful, and fast. meson-python implement the Python build system hooks, enabling Python build front-ends such as pip and build to build and install Python packages based on a Meson build definition. Since we are separating the steps any way when moving to pyproject.toml, we use meson-python to also build PyGObject. 
+
+Here is a portion of the pyproject.toml looks like for the build settings. The parts in brackets are the section for meson-python arguments and the build system, and in each section are the key value pairs for setup options, the build backend, and build dependencies.
+
+Nice so now we can build PyGObject like any other GNOME project.
+
+:::
+
+## PDM 
+
+```{=latex}
+\begin{center}
+```
+![Packaging Categorization by Anna-Lena Popkes](pdm.png){height=70%}
+```{=latex}
+\end{center}
+```
+
+::: notes
+
+When someone says Python Packaging, they could mean a lot of different things.
+
+- Environment management (which is mostly concerned with virtual environments) in purple
+- Package management in blue
+- Python version management in green
+- Package building in yellow
+- Package publishing in red
+
+meson-python takes care of the yellow since it is a build tool. We decided to add PDM to the mix which takes care of a lot of the other areas to make it easier to contribute to the project and still works with meson-python. It manages dependencies installation including resolving and locking dependency versions, setting up a virtual environment, and publishing new versions of PyGObject to PyPI which is the Python Package Index.
+
+One the other tools in the blue called pipx is really nice for installing isolated Python tools. As long as you have the other system dependencies installed for PyGObject, you can install PDM using pipx, grab the PyGObject source, and then run `pdm install` to get a complete working environment.
+
+Reference: https://alpopkes.com/posts/python/packaging_tools/
 :::
 
 ## Modernize API Docs
@@ -341,10 +400,88 @@ less maintenance is required going forward.
 - Small change to rename the primary branch to main
 - Improves exclusivity and standardization with other GNOME projects
 
-## Experimental: Asyncio Integration
+## Overview of Async IO
 
-- Implements Python asyncio await for Gio async results
+- Cooperative multitasking
+- Scheduled concurrently, but not actually run at the same time
+- Can provide large speedups if waiting on slower tasks
 
+::: notes
+
+Async IO is a means to use cooperative multitasking. It gives the feeling of concurrency despite using a single thread in a single process. The central feature of AsyncIO called Coroutines can be scheduled concurrently, but they don't actually run at the same time. This can provide large speedups for cases where the program is waiting on something slower than the main execution of the program itself. For example, if a program needs to go out and fetch information from the network or from a complex database query, it can schedule other things to happen while it is waiting for the data to return.
+
+:::
+
+## Async IO with my Kids
+
+```{=latex}
+\begin{center}
+```
+![](nintendo-switch.jpg){height=50%}
+```{=latex}
+\end{center}
+```
+
+::: notes
+
+We have a Nintendo Switch at home and my kids like to play some Super Mario Kart 8 Deluxe or Super Smash Brothers with me. But, boy do they really take a long time to actually start playing. They will browse a couple videos about new game releases, they'll watch the game's opening credits, they will customize their character. Pretty soon, it is 15 min before we have even started to play something. There also really isn't an opportunity to interact much with them during this time period, so I'll often open my phone and see what's new on Mastodon, look at the latest chatter on Matrix, or take a look at anything new with the open source projects I'm working on.
+
+In this scenario, I am not doing full multitasking to do both things at the same time, I do other things while I wait for them to get ready. I didn't do more things at once, but I did do more things overall that I wanted to do.
+
+This is kind of how Async IO works, it allows us to schedule tasks in coroutines, like playing a video game and looking at my phone, and switch between them when waiting for another.import asyncio
+
+:::
+
+## Async IO in Python
+
+```python
+import asyncio
+
+async def hello():
+    print('Hello ...')
+    await asyncio.sleep(1)
+    print('... World!')
+async def main():
+    await asyncio.gather(hello(), hello())
+asyncio.run(main())
+
+Hello ...
+Hello ...
+... World!
+... World!
+```
+
+::: notes
+
+This is a simple Hello World example of using Async IO. First we import it. Next we define a hello coroutine, which is a normal function definition with the async keyword in front. We print hello. Next we use the await keyword to let another coroutine run to sleep for 1 second. Finally after that runs we print World.
+
+We also define a 2nd coroutine called main, this uses `async.gather` to schedule the hello coroutine to be run twice concurrently as two tasks. When this executes, it print Hello, then runs sleep, but that is non-blocking so and there is another call of hello scheduled, so it prints Hello again. Once the sleep coroutine finishes, it resumes printing World twice.
+
+:::
+
+## Python Async with Gbulb
+
+- Gbulb uses the full GLib EventLoop
+
+```python
+import asyncio, gbulb
+
+gbulb.install(gtk=True)
+
+loop = asyncio.get_event_loop()
+loop.run_forever(application=my_gapplication_object)
+
+::: notes
+
+Here you can see that it was possible to import asyncio and gbulb, and tie asyncio to GLib EventLoop. This is useful for GUI applications because if you have something long running, you won't block the GUI and make it unresponsive. It was a heavy implementation that implements most asyncio functions on top of GLib. There was also another library called asyncio-glib that forced the GMainContext into the python SelectorEventLoop.
+
+To compare them, Gbulb dispatches asyncio callbacks directly from the GLib main loop. In contrast, asyncio-glib iterates the GLib main loop until an asyncio event is ready and then has asyncio event loop dispatch the event.
+
+:::
+
+## Experimental: Async IO Integration
+
+Implements Python asyncio await for Gio async results
 ```python
 async def idle_test():
     bus = await Gio.bus_get(Gio.BusType.SYSTEM)
@@ -357,10 +494,11 @@ loop = policy.get_event_loop()
 loop.run_until_complete(idle_test())
 ```
 
-<!---
-After 2 years of work, Benjamin Berg finished an initial implementation of Asyncio integration with PyGObject which was merged this week! This approach uses the GMainLoop to drive the EventLoop, as opposed to other approaches like GBulb and aysncio-glib which implement a full EventLoop or have the EventLoop drive the GMainContext.
--->
+::: notes
 
+After 2 years of work, Benjamin Berg finished an initial implementation of Asyncio integration with PyGObject which was merged this week! This approach uses the GMainLoop to drive the EventLoop, by forcing a modified SelectorEventLoop/ProactorEventLoop into GMainLoop/GMainContext. One large advantage this has it allows us to await Gio async functions.
+
+:::
 
 # The Future
 
