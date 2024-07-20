@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="adw" version="1.4"/>
+  <object class="AdwStatusPage">
+    <property name="title" translatable="true">Column View</property>
+    <property name="description" translatable="true">Arrange a large and dynamic list of items in columns</property>
+    <property name="valign">1</property>
+    <child>
+      <object class="AdwClamp">
+        <property name="maximum-size">240</property>
+        <child>
+          <object class="GtkBox">
+            <property name="orientation">1</property>
+            <property name="spacing">18</property>
+            <child>
+              <object class="GtkBox">
+                <property name="halign">3</property>
+                <child>
+                  <object class="GtkLinkButton">
+                    <property name="label" translatable="true">API Reference</property>
+                    <property name="uri">https://docs.gtk.org/gtk4/class.ColumnView.html</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLinkButton">
+                    <property name="label" translatable="true">Documentation</property>
+                    <property name="uri">https://docs.gtk.org/gtk4/section-list-widget.html</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkFrame">
+                <child>
+                  <object class="GtkColumnView" id="column_view">
+                    <property name="show-column-separators">true</property>
+                    <property name="show-row-separators">true</property>
+                    <child>
+                      <object class="GtkColumnViewColumn" id="col1">
+                        <property name="title" translatable="true">Title</property>
+                        <property name="factory">
+                          <object class="GtkSignalListItemFactory"></object>
+                        </property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkColumnViewColumn" id="col2">
+                        <property name="title" translatable="true">Author</property>
+                        <property name="factory">
+                          <object class="GtkSignalListItemFactory"></object>
+                        </property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkColumnViewColumn" id="col3">
+                        <property name="title" translatable="true">Year</property>
+                        <property name="factory">
+                          <object class="GtkSignalListItemFactory"></object>
+                        </property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

@@ -286,7 +286,7 @@ col3.sorter = Gtk.NumericSorter.new(col3_exp)
 
 The implementation of Fundamental Types in PyGObject fixes use case number 1 from the On PyGObject blog post. The original work to support this was started in 2010, and Arjan Molenaar brushed it off and brought it home.
 
-Now we can make use of Expressions! Here we create three property expressions, pass in our Book class, None because we don't need to evaluate an extra Expression, and then the column name.
+Now we can make use of Expressions for our logic. Here we create three property expressions, pass in our Book class, None because we don't need to evaluate an extra Expression, and then the column name.
 
 Finally we set the sorter for each column to String Sorters for the title and author columns and Numeric Sorters for the year column and pass in the Property Expressions we just created. Said another way the sorter for each column is bound to the property of the book for that column.
 
