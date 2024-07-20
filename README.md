@@ -1,4 +1,7 @@
 # Conference Talks and Proposals
+[GUADEC 2024](https://events.gnome.org/event/209/)
+- Showing Up for Pythin in GNOME
+
 [PyCon 2019](https://us.pycon.org/2019/)
 - 5 Steps to Build Python Native GUI Widgets for BeeWare [slides](https://dan.yeaw.me/slides/gui-widget-for-beeware) and [video](https://www.youtube.com/watch?v=sWt_sEZUiY8)
 
