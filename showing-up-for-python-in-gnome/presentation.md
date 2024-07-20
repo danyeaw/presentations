@@ -1,6 +1,6 @@
 % Showing Up for Python in GNOME
-% Dan Yeaw (`dan@yeaw.me`)
-% July 20, 2024
+% Dan Yeaw (@danyeaw:gnome.org)
+% 2024-07-20
 
 ## About Me
 
@@ -83,10 +83,10 @@ Emmanuele Bassi (2022)
 
 ::: notes
 
-In December 2022, Emmanuele Bassi wrote a blog post called "On PyGObject" with a call to action to get involved to help Christoph Reiter, the maintainer of the library. He went through 3 large use cases of features missing in PyGObject which was really make it hard to recommend. These included:
+In December 2022, Emmanuele Bassi wrote a blog post called "On PyGObject" with a call to action to get involved to help Christoph Reiter, the maintainer of the library. He went through 3 large use cases of features missing in PyGObject which really make it hard to recommend. These included:
 
 1. Typed Instances for things like GtkExpression, GtkRenderNode, and GtkEvent. These Foundational Types weren't supported since they aren't based on GObjects.
-2. The base wrapper for GObject itself is written in Python instead of using gobject-introspection directly. However, this means that constructing and disposing of objects can be difficult because PyGObject doesn't automatically get access to the functions for doing those operations.
+2. The base wrapper for GObject itself is written in Python instead of using gobject-introspection directly. This means that constructing and disposing of objects can be difficult because PyGObject doesn't automatically get access to the functions for doing those operations.
 3. Documentation is spread out everywhere, and a lot of it wasn't updated for GTK4.
 
 :::
@@ -116,7 +116,7 @@ You can see the pattern of this in the commit history, although it isn't the onl
 
 Major open source projects really need a contribution funnel to get more people involved. This type of community building requires many hands to help newcomers, triage issues, review contributions, answer questions, and provide support.
 
-Unfortunately, it is all too common to have one person trying to hold everything together on multiple projects. However, this is a catch-22, that one person is barely holding things together, and each issue raised, each merge request submitted is extra work and burden for them.
+Unfortunately, it is all too common to have one person trying to hold everything together on multiple projects. This is a catch-22, that one person is barely holding things together, and each issue raised, each merge request submitted is extra work and burden for them.
 
 It doesn't feel welcoming to new people if they show up to help and their contributions dead rot, it is natural to move along and spend your time on things that you feel are making a difference.
 
@@ -173,7 +173,7 @@ Although we haven't quite got all the way to just the subset that we are really 
 
 ::: notes
 
-GObject is the base type system and object class and is used for most of GTK and related libraries. Types are the fundamental part of a programming language like C, to translate a type like a char to the machine architecture with a minimum size like 8 bits and a maximum size. GLib provides a type system for GTK related libraries. Most of these types are fundamental types that are instantiated by GLib automatically, like a gchar. Most objects are created by inheriting from GObject to get memory management, properties like getters and setters, and construction/deconstruction of instances. However, not every piece of data used in a GTK application needs all that. So other fundamental types are created by defined by Gtk by defining a class and instance structure. Up until recently, PyGObject didn't support making use of these Fundamental types for data in your program like Expressions, RenderNodes, and Events. Let's jump in to an example!
+GObject is the base type system and object class and is used for most of GTK and related libraries. Types are the fundamental part of a programming language like C, to translate a type like a char to the machine architecture with a minimum size like 8 bits and a maximum size. GLib provides a type system for GTK related libraries. Most of these types are fundamental types that are instantiated by GLib automatically, like a gchar. Most objects are created by inheriting from GObject to get memory management, properties like getters and setters, and construction/deconstruction of instances. However, not every piece of data used in a GTK application needs all that. So other fundamental types are created by GTK through defining a class and instance structure. Up until recently, PyGObject didn't support making use of these Fundamental types for data in your program like Expressions, RenderNodes, and Events. Let's jump in to an example!
 
 :::
 
@@ -191,7 +191,7 @@ GObject is the base type system and object class and is used for most of GTK and
 
 ::: notes
 
-Workbench is this great app for learning and prototyping GNOME apps created by Sonny Piers and lots of contributions from the community to create tutorials in Vala, Python, Rust, and Javascript - I highly recommend it!! Here you can see the ColumnView example. ColumnView was added in GTK4 as an easier way to create a table of data. 
+Workbench is this great app for learning and prototyping GNOME apps in Vala, Python, Rust, and Javascript - I highly recommend it!! Here you can see the ColumnView example. ColumnView was added in GTK4 as an easier way to create a table of data. 
 
 Here is a list of books with title, author, and year. You can sort the columns by clicking on the column header, and also select a row which is shown in the light blue.
 
@@ -227,7 +227,7 @@ col2 = workbench.builder.get_object("col2")
 col3 = workbench.builder.get_object("col3")
 
 model_func = lambda _item: None
-tree_model = Gtk.TreeListModel.new(ta_model, False, True, model_func)
+tree_model = Gtk.TreeListModel.new(data_model, False, True, model_func)
 tree_sorter = Gtk.TreeListRowSorter.new(column_view.get_sorter())
 sorter_model = Gtk.SortListModel(model=tree_model, sorter=tree_sorter)
 selection = Gtk.SingleSelection.new(model=sorter_model)
@@ -236,8 +236,10 @@ column_view.set_model(model=selection)
 
 ::: notes
 
-
-This fixes a ton of low level issues. you’ll be able to do advanced custom drawing using render nodes, as well as accessing low level windowing system event objects, in your Python applications.
+First we get some objects from Workbench, the column view and the 3 columns.
+Next we create an empty function called the model func using a lambda.
+We need to create a tree model, a tree sorter, a sorter model, and then a selection which we set as the model for the ColumnView.
+The model is a Gio.DataModel, we make use of Gtk by instatiating the TreeListModel, TreeListRowSorter, SortListModel, and a SingleSelection.
 
 :::
 
@@ -288,6 +290,8 @@ The implementation of Fundamental Types in PyGObject fixes use case number 1 fro
 Now we can make use of Expressions! Here we create three property expressions, pass in our Book class, None because we don't need to evaluate an extra Expression, and then the column name.
 
 Finally we set the sorter for each column to String Sorters for the title and author columns and Numeric Sorters for the year column and pass in the Property Expressions we just created. Said another way the sorter for each column is bound to the property of the book for that column.
+
+The addition of Fundamental types is such a large improvement!
 
 :::
 
@@ -345,9 +349,9 @@ $ meson test -C _build
 
 ::: notes
 
-Meson is the standard build system used by GNOME projects, it is easy to use, powerful, and fast. meson-python implement the Python build system hooks, enabling Python build front-ends such as pip and build to build and install Python packages based on a Meson build definition. Since we are separating the steps any way when moving to pyproject.toml, we use meson-python to also build PyGObject. Other popular Python libraries like Numpy and Scipy have already moved to use meson-python, and pycairo (the python bindings for Cairo) will as well soon. It especially fills the niche of Python projects that need to compile other languages as well.
+Meson is the standard build system used by GNOME projects, it is easy to use, powerful, and fast. meson-python implement the Python build system hooks, enabling Python build front-ends such as pip and build to build and install Python packages based on a Meson build definition. Since we are separating the steps any way when moving away from setup.py, we use meson-python to also build PyGObject. Other popular Python libraries like Numpy and Scipy have already moved to use meson-python, and pycairo (the python bindings for Cairo) will as well soon. It especially fills the niche of Python projects that need to compile other languages as well.
 
-Here is a portion of the pyproject.toml looks like for the build settings. The parts in brackets are the section for meson-python arguments and the build system, and in each section are the key value pairs for setup options, the build backend, and build dependencies.
+Here is a portion of the pyproject.toml looks like for the build settings this is the file that replaces setup.py. The parts in brackets are the section for meson-python arguments and the build system, and in each section are the key value pairs for setup options, the build backend, and build dependencies.
 
 Nice so now we can build PyGObject like any other GNOME project.
 
@@ -358,7 +362,7 @@ Nice so now we can build PyGObject like any other GNOME project.
 ```{=latex}
 \begin{center}
 ```
-![Packaging Categorization by Anna-Lena Popkes](pdm.png){height=70%}
+![Packaging Categorization by Anna-Lena Popkes](pdm.png){height=68%}
 ```{=latex}
 \end{center}
 ```
@@ -369,13 +373,13 @@ When someone says Python Packaging, they could mean a lot of different things.
 
 - Environment management (which is mostly concerned with virtual environments) in purple
 - Package management in blue
-- Python version management in green
+- Python version management in grey
 - Package building in yellow
 - Package publishing in red
 
 meson-python takes care of the yellow since it is a build tool. We decided to add PDM to the mix which takes care of a lot of the other areas to make it easier to contribute to the project and still works with meson-python. It manages dependencies installation including resolving and locking dependency versions, setting up a virtual environment, and publishing new versions of PyGObject to PyPI which is the Python Package Index.
 
-One the other tools in the blue called pipx is really nice for installing isolated Python tools. As long as you have the other system dependencies installed for PyGObject, you can install PDM using pipx, grab the PyGObject source, and then run `pdm install` to get a complete working environment.
+One of the other tools in the blue, called pipx, is really nice for installing isolated Python tools. As long as you have the other system dependencies installed for PyGObject, you can install PDM using pipx, grab the PyGObject source, and then run `pdm install` to get a complete working environment.
 
 Reference: https://alpopkes.com/posts/python/packaging_tools/
 :::
@@ -391,22 +395,20 @@ Reference: https://alpopkes.com/posts/python/packaging_tools/
 ### Methods
 
 ```
-	classmethod from_file(filename)
-        Parameters: filename
+classmethod from_file(filename)
+    Parameters: filename
 
-    classmethod from_resource(resource_path)
-        Parameters: resource_path
-
+classmethod from_resource(resource_path)
+    Parameters: resource_path
 ```
 
 ::: notes
 Just like many other libraries have been upgrading from GTK-Doc to GI-DocGen, PyGObject also recently made the switch. GI-Docgen reuses the introspection data generated by GObject-based libraries to generate the API reference of these libraries.
 
-Previously, we were using pgi-docgen, which was a more custom way
-to read GIR docs and then create a Sphinx website from them.
+Previously, we were using pgi-docgen. pgi is a cool project by Christoph to create python bindings without C code. pgi-docgen was then able to read the GIR docs and create a Sphinx website from them. But, we decided to move to a more standard approach.
 
 Previously missing documentation, like for Gtk.Template is now available and because we are using the introspection data directly
-less maintenance is required going forward.
+and less maintenance is required going forward.
 :::
 
 ## Main Branch
@@ -442,7 +444,7 @@ We have a Nintendo Switch at home and my kids like to play some Super Mario Kart
 
 In this scenario, I am not doing full multitasking to do both things at the same time, I do other things while I wait for them to get ready. I didn't do more things at once, but I did do more things overall that I wanted to do.
 
-This is kind of how Async IO works, it allows us to schedule tasks in coroutines, like playing a video game and looking at my phone, and switch between them when waiting for another.import asyncio
+This is kind of how Async IO works, it allows us to schedule tasks in coroutines, like playing a video game and looking at my phone, and switch between them.
 
 :::
 
@@ -487,9 +489,13 @@ loop.run_forever(application=my_gapplication_object)
 
 ::: notes
 
-Here you can see that it was possible to import asyncio and gbulb, and tie asyncio to GLib EventLoop. This is useful for GUI applications because if you have something long running, you won't block the GUI and make it unresponsive. It was a heavy implementation that implements most asyncio functions on top of GLib. There was also another library called asyncio-glib that forced the GMainContext into the python SelectorEventLoop.
+Here you can see that it was possible to import asyncio and gbulb, and tie asyncio to GLib EventLoop. This is useful for GUI applications because if you have something long running, you won't block the GUI and make it unresponsive. It was a heavy implementation that implements most asyncio functions on top of GLib. There was also another library called asyncio-glib.
 
 To compare them, Gbulb dispatches asyncio callbacks directly from the GLib main loop. In contrast, asyncio-glib iterates the GLib main loop until an asyncio event is ready and then has asyncio event loop dispatch the event.
+
+Here is an example for Gbulb, where run the gbulb.install function, get the asyncio event loop, and then run the loop while passing in the GTK App.
+
+One disadvantage of both Gbulb and asyncio-glib is that they don't allow you to await Gio asynchronous results. Gio is a GLib library for things like general purpose I/O and networking. Access to many of these things can be slower than your app, and is a great use case for Async IO.
 
 :::
 
@@ -511,9 +517,9 @@ async def idle_test():
 
 ::: notes
 
-After 2 years of work, Benjamin Berg finished an initial implementation of Asyncio integration with PyGObject which was merged this week! So now we have Python asyncio await for Gio async results. This approach uses the GMainLoop to drive the EventLoop, by forcing a modified SelectorEventLoop/ProactorEventLoop into GMainLoop/GMainContext. One large advantage this has it allows us to await Gio async functions.
+After 2 years of work, Benjamin Berg finished an initial implementation of Asyncio integration with PyGObject which was merged this week! So now we have Python asyncio await for Gio async results. This approach uses the GMainLoop to drive the EventLoop, and it allows us to await Gio async functions.
 
-Let's walk through an example listing the names that are available on the DBus. DBus allows inner process communication to allow applications to talk to each other. After doing some imports (which I didn't show here), we define a coroutine called idle test. Since Gio support asynchronous calls we await getting the SystemBus by calling Gio.bus_get and passing in the bus type. Now that we have the system bus, we call call the DBus while passing in the bus name, object path, interface name, and the method we want to use, then there is paremeters for the method (None), a reply type (None), extra flag, and the -1 gives us the default timeout.
+Let's walk through an example listing the names that are available on the DBus. DBus allows inner process communication to allow applications to talk to each other. After doing some imports (which I didn't show here), we define a coroutine called idle test. Since Gio support asynchronous calls we await getting the SystemBus by calling Gio.bus_get and passing in the bus type. Now that we have the system bus, we call call the DBus while passing in the bus name, object path, interface name, and the method we want to use, and various other parameters.
 
 :::
 
@@ -539,6 +545,8 @@ Finally we need a bit of boilerplate to get things going. We get the GLibEventLo
 
 Our program then prints out the names from DBus and we have successfully awaited an async results.
 
+Wow, Async IO directly in PyGObject!
+
 :::
 
 # The Future
@@ -552,7 +560,10 @@ Our program then prints out the names from DBus and we have successfully awaited
 ::: notes
 For security reasons, Python 3.8 stopped automatically loading DLLs on the path on Windows. Many libraries including PyGObject previously depended on this behavior. If you do build GTK on Windows using Gvsbuild or with MSVC directly, you don't end up with a working PyGObject without manually loading the DLLs or patching PyGObject.
 
-We have discussed options to fix this, and there hasn't been much excitement in adding a DLL search routine in PyGObjects startup code. However, a Wheel format allows for DLLs to be bundled along side of the project though and then they are automatically loaded. This would also significantly improve install time as well, since users can directly install a pre-compiled version of PyGObject instead of compiling it during the installation.
+We have discussed options to fix this, and there hasn't been much excitement in adding a DLL search routine in PyGObjects startup code. However, a Wheel format allows for DLLs to be bundled along side of the PyGObject library and then they are automatically loaded. This would also significantly improve install time as well, since users can directly install a pre-compiled version of PyGObject instead of compiling it during the installation.
+
+We should also consider building Wheels for the other platforms as well for this same reason.
+
 :::
 
 ## Port to `libgirepository-2.0`
