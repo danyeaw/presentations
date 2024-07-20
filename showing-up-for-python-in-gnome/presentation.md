@@ -17,7 +17,6 @@
 - Originally from California, now live in Michigan
 - Gaphor, Gvsbuild, PyGObject
 
-
 ::: notes
 
 Hi, I'm Dan Yeaw, and I'm sooo excited to talk to you about Showing up for Python in GNOME!!
