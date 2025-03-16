@@ -17,8 +17,8 @@ own applications.
 
 ## Authors
 
-Dan Yeaw
-Arjan Molenaar
+- Dan Yeaw
+- Arjan Molenaar
 
 ## Contribution type
 
@@ -122,12 +122,13 @@ he/him
 
 ## Email address
 
-dan@yeaw.me
+- dan@yeaw.me
+- gaphor@gmail.com
 
 ## Twitter and/or Mastodon Handle
 
-https://fosstodon.org/@danyeaw
-https://fosstodon.org/@amolenaar
+- https://fosstodon.org/@danyeaw
+- https://fosstodon.org/@amolenaar
 
 ## Will this be your first time speaking at GUADEC?
 
